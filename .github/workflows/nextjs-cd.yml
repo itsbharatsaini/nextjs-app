@@ -26,7 +26,7 @@ jobs:
       - name: Deploy to VM
         run: |
           ssh user@staging-server 'docker stop nextjs-app || true'
-          ssh user@staging-server 'docker run -d -p 8080:8080 --name nextjs-app itsbharatsaini/nextjs-app:latest'
+          ssh user@staging-server 'docker run -d -p 3000:3000 --name nextjs-app itsbharatsaini/nextjs-app:latest'
 
       # - name: Deploy to Azure Web App
       #   id: deploy-to-webapp
