@@ -1,0 +1,31 @@
+name: Next.js CI
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: ESLint static code analysis
+      run: npm run lint
+
+    - name: Prettier - Code Formatter
+      run: npm run format
+
+
+    - name: Build Docker Image
+      run: |
+        docker build -t itsbharatsaini/nextjs-app:latest .
+        docker login -u itsbharatsaini -p ${{ secrets.DOCKERHUB_TOKEN }}
+        docker push itsbharatsaini/nextjs-app:latest
